@@ -1,7 +1,11 @@
-import "./App.css";
+import BoardRoom from "./pages/BoardRoom";
 
 function App() {
-  return <div></div>;
+  return (
+    <>
+      <BoardRoom />;
+    </>
+  );
 }
 
 export default App;
