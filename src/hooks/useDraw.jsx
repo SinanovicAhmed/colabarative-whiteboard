@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useDraw = (color) => {
+export const useDraw = (drawAndEmit) => {
   const [mouseDown, setMouseDown] = useState(false);
   const canvasRef = useRef(null);
   const prevPoint = useRef(null);
@@ -16,26 +16,6 @@ export const useDraw = (color) => {
   };
 
   useEffect(() => {
-    const drawLine = (prevPoint, currentPoint, ctx) => {
-      const { x: currX, y: currY } = currentPoint;
-
-      const lineColor = color;
-      const lineWidth = 5;
-
-      let startPoint = prevPoint ?? currentPoint;
-      ctx.beginPath();
-      ctx.lineWidth = lineWidth;
-      ctx.strokeStyle = lineColor;
-      ctx.moveTo(startPoint.x, startPoint.y);
-      ctx.lineTo(currX, currY);
-      ctx.stroke();
-
-      ctx.fillStyle = lineColor;
-      ctx.beginPath();
-      ctx.arc(startPoint.x, startPoint.y, 2, 0, 2 * Math.PI);
-      ctx.fill();
-    };
-
     const mouseMoveHandler = (e) => {
       if (!mouseDown) return;
       const currentPoint = pointerCanvasPosition(e);
@@ -43,7 +23,7 @@ export const useDraw = (color) => {
       const canvasCtx = canvasRef.current?.getContext("2d");
       if (!canvasCtx || !currentPoint) return;
 
-      drawLine(prevPoint.current, currentPoint, canvasCtx);
+      drawAndEmit(prevPoint.current, currentPoint, canvasCtx);
       prevPoint.current = currentPoint;
     };
 
@@ -70,7 +50,7 @@ export const useDraw = (color) => {
       canvasRef.current?.removeEventListener("mousemove", mouseMoveHandler);
       window.removeEventListener("mouseup", mouseUpHandler);
     };
-  }, [mouseDown]);
+  }, [drawAndEmit, mouseDown]);
 
   return { canvasRef, onMouseDown, clearCanvas };
 };
