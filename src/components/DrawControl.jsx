@@ -1,7 +1,14 @@
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3001");
+
 // eslint-disable-next-line react/prop-types
 const DrawControl = ({ setColor, color, clearCanvas }) => {
   const handleColorChange = (event) => setColor(event.target.value);
-  console.log(color);
+
+  const handleClear = () => {
+    socket.emit("clearCanvas");
+    clearCanvas();
+  };
   return (
     <div className="absolute bottom-4 flex gap-4">
       <div
@@ -87,7 +94,7 @@ const DrawControl = ({ setColor, color, clearCanvas }) => {
       </div>
 
       <button
-        onClick={clearCanvas}
+        onClick={handleClear}
         className="px-3 border-2 border-red-700 hover:bg-red-700 text-red-700 hover:text-white rounded-md transition-all"
       >
         Clear

@@ -11,7 +11,6 @@ export const useDraw = (drawAndEmit) => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 

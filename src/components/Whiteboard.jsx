@@ -11,14 +11,37 @@ const Whiteboard = () => {
   const { canvasRef, onMouseDown, clearCanvas } = useDraw(drawAndEmit);
 
   useEffect(() => {
+    socket.emit("user-joined");
+
+    socket.on("requested-canvas-state", (state) => {
+      const ctx = canvasRef.current?.getContext("2d");
+      const img = new Image();
+      img.src = state;
+      img.onload = () => {
+        ctx?.drawImage(img, 0, 0);
+      };
+    });
+
+    socket.on("request-canvas-state", () => {
+      const dataURL = canvasRef.current.toDataURL("image/png", 0);
+      if (dataURL) {
+        socket.emit("canvas-state", dataURL);
+      }
+    });
+
     socket.on("drawing", ({ prevPoint, currentPoint, color }) => {
       const ctx = canvasRef.current?.getContext("2d");
       if (!canvasRef) return;
       drawLine(prevPoint, currentPoint, ctx, color);
     });
 
+    socket.on("clearCanvas", clearCanvas);
+
     return () => {
       socket.off("drawing");
+      socket.off("clearCanvas");
+      socket.off("request-canvas-state");
+      socket.off("requested-canvas-state");
     };
   }, [canvasRef]);
 
