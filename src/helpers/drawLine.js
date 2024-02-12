@@ -1,5 +1,4 @@
 export const drawLine = (prevPoint, currentPoint, ctx, color) => {
-  //console.log("prevPoint:", prevPoint, "|", "currentPoint:", currentPoint);
   const lineColor = color;
   const lineWidth = 5;
 

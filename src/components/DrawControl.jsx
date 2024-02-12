@@ -1,12 +1,11 @@
-import { io } from "socket.io-client";
-const socket = io("http://localhost:3001");
+import socket from "../helpers/socketConnection";
 
 // eslint-disable-next-line react/prop-types
-const DrawControl = ({ setColor, color, clearCanvas }) => {
+const DrawControl = ({ setColor, color, clearCanvas, currentRoom }) => {
   const handleColorChange = (event) => setColor(event.target.value);
 
   const handleClear = () => {
-    socket.emit("clearCanvas");
+    socket.emit("clearCanvas", currentRoom);
     clearCanvas();
   };
   return (

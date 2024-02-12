@@ -2,16 +2,25 @@ import { useEffect, useState } from "react";
 import DrawControl from "./DrawControl";
 import { useDraw } from "../hooks/useDraw";
 import { drawLine } from "../helpers/drawLine";
-import { io } from "socket.io-client";
-
-const socket = io("http://localhost:3001");
+import { useLocation } from "react-router-dom";
+import socket from "../helpers/socketConnection";
 
 const Whiteboard = () => {
+  const { state } = useLocation();
+  const [currentRoom, setCurrentRoom] = useState(state.roomName);
   const [color, setColor] = useState("#000");
   const { canvasRef, onMouseDown, clearCanvas } = useDraw(drawAndEmit);
 
   useEffect(() => {
-    socket.emit("user-joined");
+    socket.emit("user-joined", currentRoom);
+
+    socket.on("request-canvas-state", () => {
+      console.log("requested");
+      const dataURL = canvasRef.current.toDataURL("image/png", 0);
+      if (dataURL) {
+        socket.emit("canvas-state", { dataURL, currentRoom });
+      }
+    });
 
     socket.on("requested-canvas-state", (state) => {
       const ctx = canvasRef.current?.getContext("2d");
@@ -20,13 +29,6 @@ const Whiteboard = () => {
       img.onload = () => {
         ctx?.drawImage(img, 0, 0);
       };
-    });
-
-    socket.on("request-canvas-state", () => {
-      const dataURL = canvasRef.current.toDataURL("image/png", 0);
-      if (dataURL) {
-        socket.emit("canvas-state", dataURL);
-      }
     });
 
     socket.on("drawing", ({ prevPoint, currentPoint, color }) => {
@@ -46,7 +48,7 @@ const Whiteboard = () => {
   }, [canvasRef]);
 
   function drawAndEmit(prevPoint, currentPoint, ctx) {
-    socket.emit("drawing", { prevPoint, currentPoint, color });
+    socket.emit("drawing", { prevPoint, currentPoint, color, currentRoom });
     drawLine(prevPoint, currentPoint, ctx, color);
   }
 
@@ -60,7 +62,7 @@ const Whiteboard = () => {
         className="border border-black rounded-md bg-green-300 w-[1000px] h-[600px]"
       />
 
-      <DrawControl setColor={setColor} color={color} clearCanvas={clearCanvas} />
+      <DrawControl setColor={setColor} color={color} clearCanvas={clearCanvas} currentRoom={currentRoom} />
     </div>
   );
 };
