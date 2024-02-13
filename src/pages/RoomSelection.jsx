@@ -37,19 +37,39 @@ const RoomSelection = () => {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
-      <div className="bg-red">
+    <div className="w-full flex justify-center items-center">
+      <div className="max-w-[1000px]">
+        <form className="flex gap-2 my-4" onSubmit={handleCreateRoom}>
+          <input
+            required
+            className="px-2 border-2 border-gray-200 rounded-md"
+            ref={inputRef}
+            type="text"
+            placeholder="room name"
+          />
+          <button
+            className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+            type="submit"
+          >
+            Create room
+          </button>
+        </form>
         {rooms.map((room) => (
-          <div key={room} className="flex gap-3 justify-between">
-            <p>{room}</p>
-            <button onClick={() => handleJoinRoom(room)}>Join</button>
+          <div
+            key={room}
+            className="group flex items-center my-1 gap-3 justify-between border-2 border-blue-700 rounded-xl"
+          >
+            <p className="pl-2 text-gray-700">{room}</p>
+            <button
+              type="button"
+              className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              onClick={() => handleJoinRoom(room)}
+            >
+              Join
+            </button>
           </div>
         ))}
       </div>
-      <form onSubmit={handleCreateRoom}>
-        <input ref={inputRef} type="text" placeholder="room name" />
-        <button type="submit">Create room</button>
-      </form>
     </div>
   );
 };

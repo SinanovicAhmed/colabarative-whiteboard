@@ -53,13 +53,13 @@ const Whiteboard = () => {
   }
 
   return (
-    <div className="flex justify-center w-full h-full bg-white rounded-lg">
+    <div className="flex justify-center items-center w-full h-full bg-gray-700 rounded-lg">
       <canvas
         ref={canvasRef}
         onMouseDown={onMouseDown}
         width={1000}
         height={600}
-        className="border border-black rounded-md bg-green-300 w-[1000px] h-[600px]"
+        className="border border-black rounded-md bg-white w-[1000px] h-[600px]"
       />
 
       <DrawControl setColor={setColor} color={color} clearCanvas={clearCanvas} currentRoom={currentRoom} />
