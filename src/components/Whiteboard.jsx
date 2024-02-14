@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import DrawControl from "./DrawControl";
 import { useDraw } from "../hooks/useDraw";
 import { drawLine } from "../helpers/drawLine";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import socket from "../helpers/socketConnection";
 
 const Whiteboard = () => {
-  const { state } = useLocation();
-  const [currentRoom, setCurrentRoom] = useState(state.roomName);
+  const navigate = useNavigate();
+  const currentRoom = useLocation().state.roomName;
   const [color, setColor] = useState("#000");
   const { canvasRef, onMouseDown, clearCanvas } = useDraw(drawAndEmit);
 
@@ -39,11 +39,15 @@ const Whiteboard = () => {
 
     socket.on("clearCanvas", clearCanvas);
 
+    socket.on("room-doesnt-exist", () => {
+      navigate("/");
+    });
     return () => {
       socket.off("drawing");
       socket.off("clearCanvas");
       socket.off("request-canvas-state");
       socket.off("requested-canvas-state");
+      socket.off("room-doesnt-exist");
     };
   }, [canvasRef]);
 
