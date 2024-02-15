@@ -4,6 +4,7 @@ import { useDraw } from "../hooks/useDraw";
 import { drawLine } from "../helpers/drawLine";
 import { useLocation, useNavigate } from "react-router-dom";
 import socket from "../helpers/socketConnection";
+import WhiteboardNavbar from "./WhiteboardNavbar";
 
 const Whiteboard = () => {
   const navigate = useNavigate();
@@ -57,7 +58,8 @@ const Whiteboard = () => {
   }
 
   return (
-    <div className="flex justify-center items-center w-full h-full bg-gray-700 rounded-lg">
+    <div className="flex flex-col items-center w-full h-full bg-gray-700 rounded-lg">
+      <WhiteboardNavbar currentRoom={currentRoom} />
       <canvas
         ref={canvasRef}
         onMouseDown={onMouseDown}
