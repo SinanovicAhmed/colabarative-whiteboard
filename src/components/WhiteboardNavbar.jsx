@@ -6,7 +6,7 @@ const WhiteboardNavbar = ({ currentRoom }) => {
 
   const handleLeave = () => {
     socket.emit("leave-room", currentRoom);
-    navigate("/");
+    navigate("/roomselection");
   };
 
   return (

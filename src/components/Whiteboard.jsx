@@ -16,7 +16,6 @@ const Whiteboard = () => {
     socket.emit("user-joined", currentRoom);
 
     socket.on("request-canvas-state", () => {
-      console.log("requested");
       const dataURL = canvasRef.current.toDataURL("image/png", 0);
       if (dataURL) {
         socket.emit("canvas-state", { dataURL, currentRoom });
@@ -41,7 +40,7 @@ const Whiteboard = () => {
     socket.on("clearCanvas", clearCanvas);
 
     socket.on("room-doesnt-exist", () => {
-      navigate("/");
+      navigate("/roomselection");
     });
     return () => {
       socket.off("drawing");
