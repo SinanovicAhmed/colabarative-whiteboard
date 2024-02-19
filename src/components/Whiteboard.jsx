@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DrawControl from "./DrawControl";
 import { useDraw } from "../hooks/useDraw";
 import { drawLine } from "../helpers/drawLine";
 import { useLocation, useNavigate } from "react-router-dom";
 import socket from "../helpers/socketConnection";
 import WhiteboardNavbar from "./WhiteboardNavbar";
-
+import UserContext from "../context/UserContext";
 const Whiteboard = () => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const currentRoom = useLocation().state.roomName;
   const [color, setColor] = useState("#000");
   const { canvasRef, onMouseDown, clearCanvas } = useDraw(drawAndEmit);
 
   useEffect(() => {
-    socket.emit("user-joined", currentRoom);
+    socket.emit("user-joined", { currentRoom: currentRoom, userName: user.name });
 
     socket.on("request-canvas-state", () => {
       const dataURL = canvasRef.current.toDataURL("image/png", 0);

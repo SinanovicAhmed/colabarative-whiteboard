@@ -1,12 +1,15 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import socket from "../helpers/socketConnection";
 import { useNavigate } from "react-router-dom";
 import LandingNavbar from "../components/LandingNavbar";
+import UserContext from "../context/UserContext";
+import DisplayRooms from "../components/DisplayRooms";
 
 const RoomSelection = () => {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
   const inputRef = useRef(null);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     socket.on("rooms", (roomNames) => {
@@ -22,7 +25,8 @@ const RoomSelection = () => {
 
   const handleCreateRoom = (e) => {
     e.preventDefault();
-    socket.emit("create-room", inputRef.current.value);
+
+    socket.emit("create-room", { roomName: inputRef.current.value, userName: user.name });
     socket.on("room-created", ({ roomName }) => {
       navigate(`/board/${roomName}`, { state: { roomName: roomName } });
     });
@@ -30,7 +34,7 @@ const RoomSelection = () => {
   };
 
   const handleJoinRoom = (roomName) => {
-    socket.emit("join-room", roomName);
+    socket.emit("join-room", { roomName: roomName, userName: user.name });
     socket.on("room-joined", (roomName) => {
       navigate(`/board/${roomName}`, { state: { roomName: roomName } });
     });
@@ -56,21 +60,7 @@ const RoomSelection = () => {
               Create room
             </button>
           </form>
-          {rooms.map((room) => (
-            <div
-              key={room}
-              className="group flex items-center my-1 gap-3 justify-between border-2 border-blue-700 rounded-xl"
-            >
-              <p className="pl-2 text-gray-700">{room}</p>
-              <button
-                type="button"
-                className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-                onClick={() => handleJoinRoom(room)}
-              >
-                Join
-              </button>
-            </div>
-          ))}
+          <DisplayRooms rooms={rooms} handleJoinRoom={handleJoinRoom} />
         </div>
       </div>
     </>
