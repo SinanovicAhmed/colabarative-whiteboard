@@ -6,15 +6,21 @@ import { useLocation, useNavigate } from "react-router-dom";
 import socket from "../helpers/socketConnection";
 import WhiteboardNavbar from "./WhiteboardNavbar";
 import UserContext from "../context/UserContext";
+
 const Whiteboard = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const currentRoom = useLocation().state.roomName;
+  const [usersInRoom, setUsersInRoom] = useState([]);
   const [color, setColor] = useState("#000");
   const { canvasRef, onMouseDown, clearCanvas } = useDraw(drawAndEmit);
 
   useEffect(() => {
     socket.emit("user-joined", { currentRoom: currentRoom, userName: user.name });
+
+    socket.on("users-in-room", (users) => {
+      setUsersInRoom(users);
+    });
 
     socket.on("request-canvas-state", () => {
       const dataURL = canvasRef.current.toDataURL("image/png", 0);
@@ -45,6 +51,7 @@ const Whiteboard = () => {
     });
     return () => {
       socket.off("drawing");
+      socket.off("users-in-room");
       socket.off("clearCanvas");
       socket.off("request-canvas-state");
       socket.off("requested-canvas-state");
@@ -59,7 +66,7 @@ const Whiteboard = () => {
 
   return (
     <div className="flex flex-col items-center w-full h-full bg-gray-700 rounded-lg">
-      <WhiteboardNavbar currentRoom={currentRoom} />
+      <WhiteboardNavbar currentRoom={currentRoom} usersInRoom={usersInRoom} />
       <canvas
         ref={canvasRef}
         onMouseDown={onMouseDown}
