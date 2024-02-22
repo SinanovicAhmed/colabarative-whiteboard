@@ -18,7 +18,7 @@ const LandingNavbar = () => {
   };
 
   return (
-    <nav className="w-full flex justify-center bg-sky-700 px-5 sm:px-10 md:px-20 py-1">
+    <nav className="sticky top-0 z-20 shadow-md w-full flex justify-center bg-sky-700 px-5 sm:px-10 md:px-20 py-1">
       <div className="w-full flex justify-between items-center max-w-[1250px]">
         <img src="/images/logo.png" width={50} height={50} alt="website logo" />
         {!isLoggedIn ? (

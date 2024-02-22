@@ -60,6 +60,10 @@ const RoomSelection = () => {
               Create room
             </button>
           </form>
+          <h2 className="py-2 text-center text-gray-800 font-bold">Active rooms</h2>
+          {rooms.length == 0 && (
+            <p className="text-center text-sm text-gray-500">Currently, there are no active rooms.</p>
+          )}
           <DisplayRooms rooms={rooms} handleJoinRoom={handleJoinRoom} />
         </div>
       </div>

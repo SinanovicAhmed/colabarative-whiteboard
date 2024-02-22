@@ -11,10 +11,18 @@ const WhiteboardNavbar = ({ currentRoom, usersInRoom }) => {
   };
 
   return (
-    <div className="flex justify-between items-center w-full bg-gray-700 rounded-lg px-10 py-1">
-      <h2 className="text-gray-200 font-bold">
-        {currentRoom} <span className="text-xs text-gray-400"> ( {usersInRoom.length} users )</span>
-      </h2>
+    <div className="flex justify-between items-center mx-auto max-w-[1250px] w-full px-10 py-1">
+      <div className="group cursor-default relative flex items-center gap-1">
+        <h2 className="text-white font-bold">{currentRoom}</h2>
+        <p className="text-xs text-gray-400">( {usersInRoom.length} users )</p>
+        <div className="z-10 absolute left-0 top-full bg-white px-2 border-[1px] border-black hidden group-hover:block">
+          {usersInRoom.map((user) => (
+            <p key={user.username} className="text-sm text-gray-700">
+              {user.username}
+            </p>
+          ))}
+        </div>
+      </div>
 
       <button
         onClick={handleLeave}
