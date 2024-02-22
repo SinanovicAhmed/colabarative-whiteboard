@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import socket from "../helpers/socketConnection";
 import WhiteboardNavbar from "./WhiteboardNavbar";
 import UserContext from "../context/UserContext";
+import { savCanvasAsImage } from "../helpers/saveCanvasAsImage";
 
 const Whiteboard = () => {
   const { user } = useContext(UserContext);
@@ -75,7 +76,13 @@ const Whiteboard = () => {
         className="border border-black rounded-md bg-white w-[1000px] h-[600px]"
       />
 
-      <DrawControl setColor={setColor} color={color} clearCanvas={clearCanvas} currentRoom={currentRoom} />
+      <DrawControl
+        setColor={setColor}
+        color={color}
+        clearCanvas={clearCanvas}
+        currentRoom={currentRoom}
+        saveCanvas={() => savCanvasAsImage(canvasRef)}
+      />
     </div>
   );
 };

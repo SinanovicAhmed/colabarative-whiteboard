@@ -1,7 +1,9 @@
+import SaveIcon from "../assets/svg/SaveIcon";
+import TrashIcon from "../assets/svg/TrashIcon";
 import socket from "../helpers/socketConnection";
 
 // eslint-disable-next-line react/prop-types
-const DrawControl = ({ setColor, color, clearCanvas, currentRoom }) => {
+const DrawControl = ({ setColor, color, clearCanvas, currentRoom, saveCanvas }) => {
   const handleColorChange = (event) => setColor(event.target.value);
 
   const handleClear = () => {
@@ -92,11 +94,11 @@ const DrawControl = ({ setColor, color, clearCanvas, currentRoom }) => {
         />
       </div>
 
-      <button
-        onClick={handleClear}
-        className="px-3 border-2 border-red-700 hover:bg-red-700 text-red-700 hover:text-white rounded-md transition-all"
-      >
-        Clear
+      <button onClick={handleClear} className="text-red-500 hover:text-red-600 transition-all">
+        <TrashIcon />
+      </button>
+      <button onClick={saveCanvas} className="text-blue-700 hover:text-blue-800 transition-all">
+        <SaveIcon />
       </button>
     </div>
   );
