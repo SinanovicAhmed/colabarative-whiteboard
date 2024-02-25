@@ -5,6 +5,8 @@ import { useContext } from "react";
 import UserContext from "../context/UserContext";
 import socket from "../helpers/socketConnection";
 import { useLocation } from "react-router-dom";
+import ChatIcon from "../assets/svg/ChatIcon";
+import DisplayNotification from "./DisplayNotification";
 
 const Chat = () => {
   const [inputValue, setInputValue] = useState("");
@@ -40,35 +42,34 @@ const Chat = () => {
   }, [showChat]);
 
   return (
-    <div className="absolute bottom-0 left-0 w-full min-w-56 max-w-72 shadow-xl">
-      <div
-        onClick={handleOpenChat}
-        className="px-4 py-2 w-full flex justify-between items-center bg-blue-900 rounded-t-xl hover:cursor-pointer"
-      >
-        <h2 className="text-white text-sm font-bold">Chat</h2>
-        {notification !== 0 && (
-          <div className="h-4 min-w-4 flex justify-center items-center bg-red-500 rounded-full">
-            <p className="text-xs text-white font-semibold">{notification}</p>
-          </div>
-        )}
-      </div>
+    <div className="absolute bottom-0 left-0">
       {showChat && (
-        <div className="flex flex-col justify-between w-full h-64 bg-white p-2">
-          <DisplayChatMessages messages={messages} />
-          <form onSubmit={handleMessageSent} className="w-full mt-4 flex gap-2 justify-between items-center">
-            <input
-              onChange={(e) => setInputValue(e.target.value)}
-              value={inputValue}
-              autoFocus
-              required
-              className="w-full px-2 border-2 border-gray-200 box-borded rounded-full"
-            />
-            <button type="submit">
-              <SendIcon />
-            </button>
-          </form>
-        </div>
+        <>
+          <h2 className="rounded-t-xl bg-gray-500 px-2 py-1 text-white text-md font-semibold">Chat</h2>
+          <div className="flex flex-col justify-between w-64 h-80 bg-white p-2 shadow-xl rounded-b-lg">
+            <DisplayChatMessages messages={messages} />
+            <form
+              onSubmit={handleMessageSent}
+              className="w-full mt-4 flex gap-2 justify-between items-center"
+            >
+              <input
+                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
+                autoFocus
+                required
+                className="w-full px-2 border-2 border-gray-200 box-borded rounded-full"
+              />
+              <button type="submit">
+                <SendIcon />
+              </button>
+            </form>
+          </div>
+        </>
       )}
+      <div onClick={handleOpenChat} className="ml-2 mb-2 bg-gray-700 rounded-full hover:cursor-pointer">
+        <DisplayNotification notification={notification} />
+        <ChatIcon />
+      </div>
     </div>
   );
 };

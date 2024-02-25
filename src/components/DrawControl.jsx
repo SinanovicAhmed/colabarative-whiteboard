@@ -11,10 +11,10 @@ const DrawControl = ({ setColor, color, clearCanvas, currentRoom, saveCanvas }) 
     clearCanvas();
   };
   return (
-    <div className="absolute bottom-4 flex gap-4">
+    <div className="absolute h-full left-2 flex flex-col justify-center gap-4">
       <div
         style={{ backgroundColor: color }}
-        className="flex items-center gap-3 bg-gray-200 border-2 border-gray-300 rounded-lg px-2 py-1 transition-all duration-300"
+        className="flex flex-col items-center gap-3 bg-gray-200 border-2 border-gray-500 rounded-lg p-2 transition-all duration-300"
       >
         <input
           type="radio"
@@ -93,13 +93,14 @@ const DrawControl = ({ setColor, color, clearCanvas, currentRoom, saveCanvas }) 
           className="h-4 w-4 rounded-full bg-orange-600 cursor-pointer border border-transparent hover:border-gray-400"
         />
       </div>
-
-      <button onClick={handleClear} className="text-red-500 hover:text-red-600 transition-all">
-        <TrashIcon />
-      </button>
-      <button onClick={saveCanvas} className="text-blue-700 hover:text-blue-800 transition-all">
-        <SaveIcon />
-      </button>
+      <div className="flex flex-col gap-3 justify-center items-center bg-gray-700 border-2 border-gray-500 rounded-lg py-3">
+        <button onClick={handleClear} className="text-gray-400 hover:text-red-600 transition-all">
+          <TrashIcon />
+        </button>
+        <button onClick={saveCanvas} className="text-gray-400 hover:text-blue-800 transition-all">
+          <SaveIcon />
+        </button>
+      </div>
     </div>
   );
 };
