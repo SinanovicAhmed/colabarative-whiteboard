@@ -13,26 +13,27 @@ This is a whiteboard collaboration app built using React.js. It allows users to 
 - Run the app locally: `npm run dev`
 - Access the app via the provided URL (e.g., [http://localhost:5173](http://localhost:5173)).
 
+## Features:
 ### Landing Page:
-Upon accessing the application, users are greeted with a landing page displaying options to login with Google or continue as a guest.
+- Upon accessing the application, users are greeted with a landing page displaying options to login with Google or continue as a guest.
 
 ### Google Login:
-Users can authenticate using their Google accounts.
+- Users can authenticate using their Google accounts.
 
 ### Continue as Guest:
-Alternatively, users can continue as guests, which allows them to explore the application without authentication.
+- Alternatively, users can continue as guests, which allows them to explore the application without authentication.
 
 ### Room Creation:
-Users can create new rooms by providing a unique room name. Each room serves as a separate space for collaboration.
+- Users can create new rooms by providing a unique room name. Each room serves as a separate space for collaboration.
 
 ### Joining Active Rooms:
-Users can join existing active rooms using room selection page. Upon joining, they gain access to the collaborative drawing board and chat functionality within that room.
+- Users can join existing active rooms using room selection page. Upon joining, they gain access to the collaborative drawing board and chat functionality within that room.
 
 ### Drawing Board State:
-The drawing board state is specific to each room and updated in real-time as users draw on the canvas. Changes made by one user are immediately reflected for all other participants in the same room. Users who join the room get the latest canvas state.
+- The drawing board state is specific to each room and updated in real-time as users draw on the canvas. Changes made by one user are immediately reflected for all other participants in the same room. Users who join the room get the latest canvas state.
 
 ### Canvas State Download:
-Users have the ability to download the current state of the canvas as a PNG image, preserving their collaborative creations for future reference or sharing.
+- Users have the ability to download the current state of the canvas as a PNG image, preserving their collaborative creations for future reference or sharing.
 
 ### Room Chat:
-Each room features a chat functionality enabling users to communicate with each other in real-time.
+- Each room features a chat functionality enabling users to communicate with each other in real-time.
