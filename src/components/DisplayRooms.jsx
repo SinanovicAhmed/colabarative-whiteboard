@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 
+import TooltipUsers from "./TooltipUsers";
+
 const DisplayRooms = ({ rooms, handleJoinRoom }) => {
   return (
     <>
@@ -11,13 +13,7 @@ const DisplayRooms = ({ rooms, handleJoinRoom }) => {
           <div className="group cursor-default relative flex items-center gap-2">
             <p className="pl-2 text-gray-700">{room.roomName}</p>
             <p className="text-xs text-gray-400">({room.users.length} users)</p>
-            <div className="z-10 absolute left-0 top-full bg-white px-2 border-[1px] border-black hidden group-hover:block">
-              {room.users.map((user) => (
-                <p key={user} className="text-sm text-gray-700">
-                  {user}
-                </p>
-              ))}
-            </div>
+            <TooltipUsers usersInRoom={room.users} />
           </div>
           <button
             type="button"

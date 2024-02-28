@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import socket from "../helpers/socketConnection";
 import { useNavigate } from "react-router-dom";
+import TooltipUsers from "./TooltipUsers";
 
 const WhiteboardNavbar = ({ currentRoom, usersInRoom }) => {
   const navigate = useNavigate();
-
+  const usernamesArray = usersInRoom.map((user) => user.username);
   const handleLeave = () => {
     socket.emit("leave-room", currentRoom);
     navigate("/roomselection");
@@ -15,13 +16,7 @@ const WhiteboardNavbar = ({ currentRoom, usersInRoom }) => {
       <div className="group cursor-default relative flex items-center gap-1">
         <h2 className="text-white font-bold">{currentRoom}</h2>
         <p className="text-xs text-gray-400">( {usersInRoom.length} users )</p>
-        <div className="z-10 absolute left-0 top-full bg-white px-2 border-[1px] border-black hidden group-hover:block">
-          {usersInRoom.map((user) => (
-            <p key={user.username} className="text-sm text-gray-700">
-              {user.username}
-            </p>
-          ))}
-        </div>
+        <TooltipUsers usersInRoom={usernamesArray} />
       </div>
 
       <button
