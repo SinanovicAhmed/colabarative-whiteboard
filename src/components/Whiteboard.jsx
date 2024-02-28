@@ -66,15 +66,18 @@ const Whiteboard = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-around w-full h-full bg-gray-700">
+    <div className="relative w-full h-full bg-gray-700 px-4">
       <WhiteboardNavbar currentRoom={currentRoom} usersInRoom={usersInRoom} />
-      <canvas
-        ref={canvasRef}
-        onMouseDown={onMouseDown}
-        width={1000}
-        height={600}
-        className="border border-black rounded-md bg-white w-[1000px] h-[600px]"
-      />
+
+      <div className="overflow-auto py-4">
+        <canvas
+          ref={canvasRef}
+          onMouseDown={onMouseDown}
+          width={1000}
+          height={600}
+          className="mx-auto border border-black rounded-md bg-white"
+        />
+      </div>
 
       <DrawControl
         setColor={setColor}

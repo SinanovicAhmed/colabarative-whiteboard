@@ -11,7 +11,7 @@ const DrawControl = ({ setColor, color, clearCanvas, currentRoom, saveCanvas }) 
     clearCanvas();
   };
   return (
-    <div className="absolute h-full left-2 flex flex-col justify-center gap-4">
+    <div className="absolute h-full left-2 top-0 flex flex-col justify-center gap-4">
       <div
         style={{ backgroundColor: color }}
         className="flex flex-col items-center gap-3 bg-gray-200 border-2 border-gray-500 rounded-lg p-2 transition-all duration-300"
