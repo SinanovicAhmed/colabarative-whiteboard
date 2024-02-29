@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
 
   const handleLogout = () => {
     setUser(null);
-    setIsLoggedIn(null);
+    setIsLoggedIn(false);
     sessionStorage.removeItem("user");
   };
 

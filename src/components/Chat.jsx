@@ -42,7 +42,7 @@ const Chat = () => {
   }, [showChat]);
 
   return (
-    <div className="absolute bottom-0 left-0">
+    <div className="absolute bottom-2 left-2">
       {showChat && (
         <>
           <h2 className="rounded-t-xl bg-gray-500 px-2 py-1 text-white text-md font-semibold">Chat</h2>
@@ -66,7 +66,7 @@ const Chat = () => {
           </div>
         </>
       )}
-      <div onClick={handleOpenChat} className="ml-2 mb-2 bg-gray-700 rounded-full hover:cursor-pointer">
+      <div onClick={handleOpenChat} className="rounded-full hover:cursor-pointer drop-shadow-2xl">
         <DisplayNotification notification={notification} />
         <ChatIcon />
       </div>

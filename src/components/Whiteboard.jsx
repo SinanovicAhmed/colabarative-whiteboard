@@ -66,9 +66,8 @@ const Whiteboard = () => {
   }
 
   return (
-    <div className="relative w-full h-full bg-gray-700 px-4">
+    <div className="relative flex flex-col justify-around w-full h-full bg-gray-700 px-4">
       <WhiteboardNavbar currentRoom={currentRoom} usersInRoom={usersInRoom} />
-
       <div className="overflow-auto py-4">
         <canvas
           ref={canvasRef}

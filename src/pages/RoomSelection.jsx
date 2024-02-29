@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import LandingNavbar from "../components/LandingNavbar";
 import UserContext from "../context/UserContext";
 import DisplayRooms from "../components/DisplayRooms";
+import { toast } from "react-toastify";
 
 const RoomSelection = () => {
   const navigate = useNavigate();
@@ -16,10 +17,15 @@ const RoomSelection = () => {
       setRooms(roomNames);
     });
 
+    socket.on("room-exists", () => {
+      toast.success("Room already exists!");
+    });
+
     socket.emit("get-rooms");
 
     return () => {
       socket.off("rooms");
+      socket.off("room-exists");
     };
   }, []);
 
