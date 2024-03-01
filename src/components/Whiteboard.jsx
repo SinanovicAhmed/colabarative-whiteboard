@@ -7,6 +7,7 @@ import socket from "../helpers/socketConnection";
 import WhiteboardNavbar from "./WhiteboardNavbar";
 import UserContext from "../context/UserContext";
 import { savCanvasAsImage } from "../helpers/saveCanvasAsImage";
+import { toast } from "react-toastify";
 
 const Whiteboard = () => {
   const { user } = useContext(UserContext);
@@ -21,6 +22,14 @@ const Whiteboard = () => {
 
     socket.on("users-in-room", (users) => {
       setUsersInRoom(users);
+    });
+
+    socket.on("user-left", (removedUser) => {
+      toast.info(`${removedUser} LEFT the room.`);
+    });
+
+    socket.on("notify-user-joined", (userName) => {
+      toast.info(`${userName} JOINED the room.`);
     });
 
     socket.on("request-canvas-state", () => {
@@ -50,13 +59,16 @@ const Whiteboard = () => {
     socket.on("room-doesnt-exist", () => {
       navigate("/roomselection");
     });
+
     return () => {
       socket.off("drawing");
       socket.off("users-in-room");
+      socket.off("notify-user-joined");
       socket.off("clearCanvas");
       socket.off("request-canvas-state");
       socket.off("requested-canvas-state");
       socket.off("room-doesnt-exist");
+      socket.off("user-left");
     };
   }, [canvasRef]);
 
