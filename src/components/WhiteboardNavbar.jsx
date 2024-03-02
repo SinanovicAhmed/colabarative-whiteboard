@@ -12,7 +12,7 @@ const WhiteboardNavbar = ({ currentRoom, usersInRoom }) => {
   };
 
   return (
-    <div className="flex justify-between items-center mx-auto max-w-[1250px] w-full border-2 border-gray-500 rounded-full px-10 py-1">
+    <nav className="flex justify-between items-center mx-auto max-w-[1000px] w-full border-2 border-gray-500 rounded-full px-10 py-1">
       <div className="group cursor-default relative flex items-center gap-1">
         <h2 className="text-white font-bold">{currentRoom}</h2>
         <p className="text-xs text-gray-400">( {usersInRoom.length} users )</p>
@@ -25,7 +25,7 @@ const WhiteboardNavbar = ({ currentRoom, usersInRoom }) => {
       >
         Leave
       </button>
-    </div>
+    </nav>
   );
 };
 
