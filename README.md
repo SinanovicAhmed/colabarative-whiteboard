@@ -8,8 +8,9 @@ https://github.com/SinanovicAhmed/colabarative-whiteboard/assets/93159428/c2b94a
 
 ## Installation:
 1. Clone the repository: `git clone https://github.com/SinanovicAhmed/colabarative-whiteboard.git`
-2. Install dependencies: `npm install`
-3. Then continue instructions [here](https://github.com/SinanovicAhmed/colabarative-whiteboard-backend)
+2. Add .env file follow .env.example
+3. Install dependencies: `npm install`
+4. Then continue instructions [here](https://github.com/SinanovicAhmed/colabarative-whiteboard-backend)
 
 ## Usage:
 ### Starting the Application:
