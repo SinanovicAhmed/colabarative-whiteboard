@@ -21,11 +21,21 @@ const RoomSelection = () => {
       toast.success("Room already exists!");
     });
 
+    socket.on("room-joined", (roomName) => {
+      navigate(`/board/${roomName}`, { state: { roomName: roomName } });
+    });
+
+    socket.on("room-created", ({ roomName }) => {
+      navigate(`/board/${roomName}`, { state: { roomName: roomName } });
+    });
+
     socket.emit("get-rooms");
 
     return () => {
       socket.off("rooms");
       socket.off("room-exists");
+      socket.off("room-joined");
+      socket.off("room-created");
     };
   }, []);
 
@@ -33,17 +43,11 @@ const RoomSelection = () => {
     e.preventDefault();
 
     socket.emit("create-room", { roomName: inputRef.current.value, userName: user.name });
-    socket.on("room-created", ({ roomName }) => {
-      navigate(`/board/${roomName}`, { state: { roomName: roomName } });
-    });
     inputRef.current.value = "";
   };
 
   const handleJoinRoom = (roomName) => {
     socket.emit("join-room", { roomName: roomName, userName: user.name });
-    socket.on("room-joined", (roomName) => {
-      navigate(`/board/${roomName}`, { state: { roomName: roomName } });
-    });
   };
 
   return (
