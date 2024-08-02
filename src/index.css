@@ -24,3 +24,27 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.custom-mark-yellow {
+  background: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 225, 0, 0.1),
+    rgba(255, 225, 0, 0.7) 4%,
+    rgba(255, 225, 0, 0.3)
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.custom-mark-pink {
+  background: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 182, 193, 0.1),
+    rgba(255, 182, 193, 0.7) 4%,
+    rgba(255, 182, 193, 0.3)
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}

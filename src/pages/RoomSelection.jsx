@@ -53,24 +53,24 @@ const RoomSelection = () => {
   return (
     <>
       <LandingNavbar />
-      <div className="w-full flex justify-center items-center">
-        <div className="max-w-[1000px]">
+      <div className="w-full h-screen bg-background-image flex justify-center items-start">
+        <div className="w-full max-w-[600px]">
           <form className="flex gap-2 my-4" onSubmit={handleCreateRoom}>
             <input
               required
-              className="px-2 border-2 border-gray-200 rounded-md"
+              className="grow px-2 border-2 border-gray-200 rounded-md"
               ref={inputRef}
               type="text"
               placeholder="room name"
             />
             <button
-              className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              className="bg-gray-900 hover:bg-gray-800 text-white text-sm rounded-full py-2 px-4 transition duration-300 ease-in-out"
               type="submit"
             >
               Create room
             </button>
           </form>
-          <h2 className="py-2 text-center text-gray-800 font-bold">Active rooms</h2>
+          <h2 className="py-6 text-xl text-center text-gray-800 font-bold">Active rooms</h2>
           {rooms.length == 0 && (
             <p className="text-center text-sm text-gray-500">Currently, there are no active rooms.</p>
           )}

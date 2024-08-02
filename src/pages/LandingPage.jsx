@@ -4,7 +4,7 @@ import LandingNavbar from "../components/LandingNavbar";
 
 const LandingPage = () => {
   return (
-    <main className="relative bg-gray-100">
+    <main>
       <LandingNavbar />
       <Hero />
       <About />

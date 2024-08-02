@@ -8,7 +8,7 @@ const DisplayRooms = ({ rooms, handleJoinRoom }) => {
       {rooms.map((room) => (
         <div
           key={room.roomName}
-          className="flex items-center my-1 gap-3 justify-between border-2 border-blue-700 rounded-xl"
+          className="flex items-center my-1 gap-3 justify-between border-2 border-gray-900 rounded-xl"
         >
           <div className="group cursor-default relative flex items-center gap-2">
             <p className="pl-2 text-gray-700">{room.roomName}</p>
@@ -17,7 +17,7 @@ const DisplayRooms = ({ rooms, handleJoinRoom }) => {
           </div>
           <button
             type="button"
-            className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+            className="bg-gray-900 hover:bg-gray-800 text-white text-sm rounded-md py-2 px-4 transition duration-300 ease-in-out"
             onClick={() => handleJoinRoom(room.roomName)}
           >
             Join
