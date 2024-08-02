@@ -3,8 +3,12 @@
 ## Overview:
 This is a whiteboard collaboration app built using React.js. It allows users to create or join rooms where they can collaborate on a shared drawing board in real-time. The app supports features such as Google login, room creation, joining active rooms, real-time updates of the canvas, downloading canvas state as PNG, and room-specific chat functionality.
 
-## Demo:
-https://github.com/SinanovicAhmed/colabarative-whiteboard/assets/93159428/c2b94a86-517d-401a-86ca-e526654ea82d
+## Images:
+![Screenshot_7](https://github.com/user-attachments/assets/956c1707-d702-4a06-af97-16a516f7fd5e)
+![Screenshot_9](https://github.com/user-attachments/assets/de328f44-7bdc-4728-b767-724e626c9ae6)
+![Screenshot_10](https://github.com/user-attachments/assets/3b6a9aae-ecc6-4b7e-9281-c84226d94d13)
+![Screenshot_11](https://github.com/user-attachments/assets/59e42ce6-41c2-4554-bc8d-014b165b7924)
+
 
 ## Installation:
 1. Clone the repository: `git clone https://github.com/SinanovicAhmed/colabarative-whiteboard.git`
